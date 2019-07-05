@@ -30,6 +30,10 @@ export default class PostsService {
     addComment(comment, postId) {
         return axios.post('posts/' + postId + '/comments', comment)
     }
+
+    deleteComment(commentId, postId) {
+        return axios.delete('posts/' + postId + '/comments/' + commentId)
+    }
 } 
 
 export const postsService = new PostsService();

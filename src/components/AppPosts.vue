@@ -5,7 +5,8 @@
         <li>
           {{ post.id }}
           {{ post.title }}
-          {{ countComments(post) }}
+          Number of Comments: {{ countComments(post) }}
+          Created {{ diffForHumans(post.createdAt) }}
           <div class="btn-group">
             <router-link :to="routeToSingle(post.id)">
               <button>View Post</button>
@@ -22,9 +23,12 @@
 </template>
 
 <script>
-import { postsService } from "@/services/PostsService";
+import { postsService } from "../services/PostsService";
+import { dateMixin } from '../mixins/DateMixins'
 
 export default {
+  mixins: [dateMixin],
+
   data() {
     return {
       posts: []
