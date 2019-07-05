@@ -10,8 +10,9 @@
           <label for="text">Text</label>
           <textarea id="text" v-model="newPost.text" required />
         </div>
-        <div class="form-group">
+        <div class="btn-group">
           <button type="submit">Add Post</button>
+          <button type="button" @click="resetForm">Reset</button>
         </div>
       </form>
     </div>
@@ -19,7 +20,7 @@
 </template>
 
 <script>
-import { postsService } from '@/services/PostsService'
+import { postsService } from "@/services/PostsService";
 
 export default {
   data() {
@@ -32,18 +33,24 @@ export default {
     getDefaults() {
       return {
         title: "",
-        text: "",
+        text: ""
       };
     },
 
     handleAdd() {
-      postsService.add(this.newPost)
+      postsService
+        .add(this.newPost)
         .then(response => {
           this.newPost = this.getDefaults();
-          this.$router.push('/posts')
-        }).catch(error => {
-          alert(error);
+          this.$router.push("/posts");
         })
+        .catch(error => {
+          alert(error);
+        });
+    },
+
+    resetForm() {
+      this.newPost = this.getDefaults();
     }
   }
 };
