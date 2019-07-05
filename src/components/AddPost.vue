@@ -4,11 +4,11 @@
       <form @submit.prevent="handleAdd">
         <div class="form-group">
           <label for="title">Title</label>
-          <input type="text" minlength="4" id="title" v-model="newPost.title" required />
+          <input type="text" minlength="2" id="title" v-model="newPost.title" required />
         </div>
-        <div class="form-group">
+        <div>
           <label for="text">Text</label>
-          <textarea id="text" v-model="newPost.text" required />
+          <textarea rows="4" cols="50" maxlength="300" id="text" v-model="newPost.text" required />
         </div>
         <div class="btn-group">
           <button type="submit">Add Post</button>
