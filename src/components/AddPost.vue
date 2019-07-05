@@ -65,8 +65,8 @@ export default {
     if (this.$route.params.id) {
       this.editable = true;
       postsService
-        .get(this.$route.params.id)
-        .then(response => {
+        .get(this.$route.params.id) // eslint-disable-next-line
+        .then(response => { 
           this.newPost = response.data;
         })
         .catch(error => {

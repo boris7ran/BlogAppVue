@@ -5,6 +5,7 @@
         <li>
           {{ post.id }}
           {{ post.title }}
+          {{ countComments(post) }}
           <div class="btn-group">
             <router-link :to="routeToSingle(post.id)">
               <button>View Post</button>
@@ -12,6 +13,7 @@
             <router-link :to="routeToEdit(post.id)">
               <button>Edit Post</button>
             </router-link>
+            <button @click="handleDelete(post.id)">Delete</button>
           </div>
         </li>
       </ul>
@@ -31,11 +33,31 @@ export default {
 
   methods: {
     routeToSingle(id) {
-      return `/post/${id}`
+      return `/post/${id}`;
     },
 
     routeToEdit(id) {
-      return `/edit/${id}`
+      return `/edit/${id}`;
+    },
+
+    handleDelete(id) {
+      postsService
+        .delete(id)
+        .then(response => {
+          alert('Succesfully deleted post with id: ' + id);
+          this.$router.go();
+        })
+        .catch(error => {
+          alert(error);
+        });
+    },
+
+    countComments(post){
+      let counter = 0;
+      post.comments.forEach(comment => {
+        counter++;
+      });
+      return counter;
     }
   },
 
