@@ -5,9 +5,14 @@
         <li>
           {{ post.id }}
           {{ post.title }}
-          <router-link :to="routeToSingle(post.id)">
-            <button>View Post</button>
-          </router-link>
+          <div class="btn-group">
+            <router-link :to="routeToSingle(post.id)">
+              <button>View Post</button>
+            </router-link>
+            <router-link :to="routeToEdit(post.id)">
+              <button>Edit Post</button>
+            </router-link>
+          </div>
         </li>
       </ul>
     </div>
@@ -27,6 +32,10 @@ export default {
   methods: {
     routeToSingle(id) {
       return `/post/${id}`
+    },
+
+    routeToEdit(id) {
+      return `/edit/${id}`
     }
   },
 

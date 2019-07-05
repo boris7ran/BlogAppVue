@@ -7,7 +7,7 @@ export default class PostsService {
     }
 
     getAll() {
-        return axios.get('posts')
+        return axios.get('posts');
     }
 
     get(id) {
@@ -15,7 +15,12 @@ export default class PostsService {
     }
 
     add(post) {
-        return axios.put('posts', post)
+        delete post.id;
+        return axios.put('posts', post);
+    }
+
+    edit(id, editedPost) {
+        return axios.put('posts/' + id, editedPost);
     }
 }
 

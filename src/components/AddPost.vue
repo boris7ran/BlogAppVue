@@ -13,6 +13,7 @@
         <div class="btn-group">
           <button type="submit">Add Post</button>
           <button type="button" @click="resetForm">Reset</button>
+          <button type="button" v-if="editable" @click="editPost">Edit</button>
         </div>
       </form>
     </div>
@@ -25,6 +26,7 @@ import { postsService } from "@/services/PostsService";
 export default {
   data() {
     return {
+      editable: false,
       newPost: this.getDefaults()
     };
   },
@@ -51,6 +53,25 @@ export default {
 
     resetForm() {
       this.newPost = this.getDefaults();
+    },
+
+    editPost() {
+      postsService.edit(this.$route.params.id, this.newPost);
+      this.$router.push("/post/" + this.$route.params.id);
+    }
+  },
+
+  mounted() {
+    if (this.$route.params.id) {
+      this.editable = true;
+      postsService
+        .get(this.$route.params.id)
+        .then(response => {
+          this.newPost = response.data;
+        })
+        .catch(error => {
+          alert(error);
+        });
     }
   }
 };
