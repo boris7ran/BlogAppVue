@@ -6,7 +6,7 @@ Vue.use(VueRouter)
 import AppPosts from './components/AppPosts'
 
 const routes = [
-    { path: '/posts', component: AppPosts}
+    { path: '/posts', component: AppPosts }
 ]
 
 export const router = new VueRouter({
